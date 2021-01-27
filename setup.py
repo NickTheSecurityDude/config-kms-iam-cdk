@@ -6,7 +6,7 @@ with open("README.md") as fp:
 
 
 setuptools.setup(
-    name="config_kms_iam_checker",
+    name="project",
     version="0.0.1",
 
     description="An empty CDK Python app",
@@ -19,6 +19,7 @@ setuptools.setup(
     packages=setuptools.find_packages(where="./"),
 
     install_requires=[
+        "boto3",
         "aws-cdk.core",
         "aws-cdk.aws_cloudwatch",
         "aws-cdk.aws_events",
@@ -30,8 +31,7 @@ setuptools.setup(
         "aws-cdk.aws_sns",
         "aws-cdk.aws_sns_subscriptions",
         "aws-cdk.aws_s3",
-        "aws-cdk.aws_config",
-        "boto3"
+        "aws-cdk.aws_config"
     ],
 
     python_requires=">=3.6",

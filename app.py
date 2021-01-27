@@ -2,12 +2,7 @@
 
 ###################################################################
 #
-# 1. IAM Stack
-#
-# 2. Lambda Stack
-#   - config_kms_iam_policy_checker.py
-# 
-# 3. Config Stack
+# 1. Config Stack
 # 
 ###################################################################
 
@@ -33,16 +28,17 @@ from stacks.iam_stack import IAMStack
 from stacks.lambda_stack import LambdaStack
 from stacks.config_stack import ConfigStack
 
-proj_name="config-kms-iam"
+proj_name="config-top-risks"
 
 app = core.App()
 
 iam_stack=IAMStack(app, proj_name+"-iam",env=my_env)
 lambda_stack=LambdaStack(app, proj_name+"-lambda",
-  config_kms_iam_lambda_role=iam_stack.config_kms_iam_lambda_role
+  config_ebs_enc_lambda_role=iam_stack.config_ebs_enc_lambda_role
 )
 config_stack=ConfigStack(app,proj_name+"-config",
-  config_kms_iam_checker_function=lambda_stack.config_kms_iam_checker_function
-  )
+  s3_cust_kms_function=lambda_stack.s3_cust_kms_function,
+  ebs_encrypted_volumes_function=lambda_stack.ebs_encrypted_volumes_function
+)
 
 app.synth()
